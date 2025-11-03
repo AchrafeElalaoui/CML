@@ -16,7 +16,7 @@ import pandas as pd
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
-
+import json
 BASE_DIR = Path(__file__).resolve().parent
 REPORTS_DIR = BASE_DIR / "reports"
 REPORTS_DIR.mkdir(parents=True, exist_ok=True)
@@ -87,6 +87,11 @@ if hasattr(model, "feature_importances_"):
     plt.close()
     print(f"✅ feature importance saved to {fi_path}")
 else:
+    fram={
+        "feature_importances_":"ℹ️ modèle sans feature_importances_ → on saute la 2e figure."
+    }
+    with open('metrics.json', 'w') as f:
+        json.dump(fram, f, indent=2)
     print("ℹ️ modèle sans feature_importances_ → on saute la 2e figure.")
 
 print("🎉 Terminé.")
