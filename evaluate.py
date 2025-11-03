@@ -1,4 +1,5 @@
 # evaluate.py (version blindée)
+from train import scaler
 import os
 from pathlib import Path
 
@@ -43,8 +44,10 @@ model_path = BASE_DIR / "models" / "iris_model.pkl"
 print("🔎 loading model from :", model_path)
 model = joblib.load(model_path)
 
+normalized_x_test= scaler.transform(X_test)
+
 # 4) prédiction
-y_pred = model.predict(X_test)
+y_pred = model.predict(normalized_x_test)
 print("✅ prediction OK")
 
 # 5) matrice de confusion
