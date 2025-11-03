@@ -36,20 +36,5 @@ model = KNeighborsClassifier(n_neighbors=3)
 model.fit(normalized_x_train, y_train)
 
 # Predicting the Test set results
-y_pred = model.predict(normalized_x_test)
-
-
-
-accuracy = accuracy_score(y_test, y_pred)
-
 joblib.dump(model, 'models/iris_model.pkl')
 
-# Sauvegarder les metriques
-metrics = {
-    "accuracy": accuracy,
-}
-
-with open('metrics.json', 'w') as f:
-    json.dump(metrics, f, indent=2)
-
-print(f"Accuracy: {accuracy:.4f}")
