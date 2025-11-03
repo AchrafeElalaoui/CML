@@ -1,8 +1,9 @@
 import pandas as pd
 from sklearn.datasets import load_iris
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
+from sklearn.preprocessing import Normalizer,LabelEncoder
+from sklearn.neighbors import KNeighborsClassifier
 import json
 import joblib
 
@@ -10,7 +11,7 @@ import joblib
 iris = load_iris()
 X, y = iris.data, iris.target
 
-from sklearn.preprocessing import LabelEncoder
+
 le = LabelEncoder()
 y = le.fit_transform(y)
 
@@ -20,15 +21,13 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # Normalizing data
-from sklearn.preprocessing import Normalizer
+
 scaler= Normalizer().fit(X_train) # the scaler is fitted to the training set
 normalized_x_train= scaler.transform(X_train) # the scaler is applied to the training set
 normalized_x_test= scaler.transform(X_test) # the scaler is applied to the test set
 
 # Fitting clasifier to the Training set
 # Loading libraries
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import accuracy_score
 
 # Instantiate learning model (k = 3)
 classifier = KNeighborsClassifier(n_neighbors=3)
@@ -40,7 +39,7 @@ classifier.fit(normalized_x_train, y_train)
 y_pred = classifier.predict(normalized_x_test)
 
 
-from sklearn.metrics import accuracy_score
+
 accuracy = accuracy_score(y_test, y_pred)
 
 joblib.dump(model, 'models/iris_model.pkl')
