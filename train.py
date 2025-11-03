@@ -30,13 +30,13 @@ normalized_x_test= scaler.transform(X_test) # the scaler is applied to the test 
 # Loading libraries
 
 # Instantiate learning model (k = 3)
-classifier = KNeighborsClassifier(n_neighbors=3)
+model = KNeighborsClassifier(n_neighbors=3)
 
 # Fitting the model
-classifier.fit(normalized_x_train, y_train)
+model.fit(normalized_x_train, y_train)
 
 # Predicting the Test set results
-y_pred = classifier.predict(normalized_x_test)
+y_pred = model.predict(normalized_x_test)
 
 
 
